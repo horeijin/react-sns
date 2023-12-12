@@ -16,6 +16,7 @@ export interface PostProps {
   likes?: string[];
   likeCount?: number;
   comments?: any;
+  hashTags?: string[];
 }
 
 export const HomePage: FC = ({}) => {
