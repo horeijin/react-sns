@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BsHouse } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import { MdLogout, MdLogin } from "react-icons/md";
+import { AiOutlineSearch } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 import AuthContext from "context/AuthContext";
@@ -26,6 +27,10 @@ export const MenuList: FC<Props> = ({}) => {
         <button type="button" onClick={() => navigate("/profile")}>
           <BiUserCircle />
           Profile
+        </button>
+        <button type="button" onClick={() => navigate("/search")}>
+          <AiOutlineSearch />
+          Search
         </button>
         {user === null ? (
           <button type="button" onClick={() => navigate("/users/login")}>
