@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { PostEditForm } from "components/posts/PostEditForm";
 
 interface Props {}
 
 export const PostEdit: FC<Props> = ({}) => {
-  return <>포스트 수정 페이지</>;
+  return <PostEditForm />;
 };
