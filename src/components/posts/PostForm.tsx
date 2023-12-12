@@ -9,6 +9,7 @@ import { FiImage } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 import { v4 as uuidv4 } from "uuid";
+import { PostHeader } from "./PostHeader";
 
 interface Props {}
 
