@@ -14,6 +14,10 @@ import {
   where,
 } from "firebase/firestore";
 
+import { useTranslation } from "hooks/useTranslation";
+import { useRecoilState } from "recoil";
+import { languageState } from "atom";
+
 const PROFILE_DEFAULT_URL = "/logo512.png";
 type TabType = "my" | "like";
 
@@ -23,9 +27,16 @@ export const ProfilePage: FC<Props> = ({}) => {
   const [activeTab, setActiveTab] = useState<TabType>("my");
   const [myPosts, setMyPosts] = useState<PostProps[]>([]);
   const [likePosts, setLikePosts] = useState<PostProps[]>([]);
+  const [language, setLanguage] = useRecoilState(languageState);
+  const t = useTranslation();
   const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const onClickLanguage = () => {
+    setLanguage(language === "ko" ? "en" : "ko");
+    localStorage.setItem("language", language === "ko" ? "en" : "ko");
+  };
 
   useEffect(() => {
     if (user) {
@@ -71,13 +82,22 @@ export const ProfilePage: FC<Props> = ({}) => {
             width={100}
             height={100}
           />
-          <button
-            type="button"
-            className="profile__btn"
-            onClick={() => navigate("/profile/edit")}
-          >
-            Profile Edit
-          </button>
+          <div className="profile__flex">
+            <button
+              type="button"
+              className="profile__btn"
+              onClick={() => navigate("/profile/edit")}
+            >
+              프로필 수정
+            </button>
+            <button
+              type="button"
+              className="profile__btn--language"
+              onClick={onClickLanguage}
+            >
+              {language === "ko" ? "한국어" : "English"}
+            </button>
+          </div>
         </div>
         <div className="profile__text">
           <div className="profile__name">{user?.displayName || "사용자님"}</div>

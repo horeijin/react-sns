@@ -56,7 +56,7 @@ export const CommentBox: FC<Props> = ({ data, post }) => {
               className="comment__delete-btn"
               onClick={handleDeleteComment}
             >
-              Delete
+              삭제
             </button>
           )}
         </div>

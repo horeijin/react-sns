@@ -142,7 +142,7 @@ export const LoginForm: FC<Props> = ({}) => {
           className="form__btn--google"
           onClick={onClickSocialLogin}
         >
-          Google로 로그인
+          구글로 로그인
         </button>
       </div>
       <div className="form__block">
@@ -152,7 +152,7 @@ export const LoginForm: FC<Props> = ({}) => {
           className="form__btn--github"
           onClick={onClickSocialLogin}
         >
-          Github으로 로그인
+          깃허브로 로그인
         </button>
       </div>
     </form>

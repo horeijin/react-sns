@@ -121,7 +121,7 @@ export const FollowingBox: FC<Props> = ({ post }) => {
             className="post__following-btn"
             onClick={onClickDeleteFollow}
           >
-            Following
+            팔로잉
           </button>
         ) : (
           <button
@@ -129,7 +129,7 @@ export const FollowingBox: FC<Props> = ({ post }) => {
             className="post__follow-btn"
             onClick={onClickFollow}
           >
-            Follow
+            팔로우
           </button>
         ))}
     </>

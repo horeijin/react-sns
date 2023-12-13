@@ -1,5 +1,6 @@
 import { FC, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "hooks/useTranslation";
 
 import { BsHouse } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
@@ -17,30 +18,31 @@ interface Props {}
 export const MenuList: FC<Props> = ({}) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const t = useTranslation();
 
   return (
     <div className="footer">
       <div className="footer__grid">
         <button type="button" onClick={() => navigate("/")}>
           <BsHouse />
-          Home
+          {t("MENU_HOME")}
         </button>
         <button type="button" onClick={() => navigate("/profile")}>
           <BiUserCircle />
-          Profile
+          {t("MENU_PROFILE")}
         </button>
         <button type="button" onClick={() => navigate("/search")}>
           <AiOutlineSearch />
-          Search
+          {t("MENU_SEARCH")}
         </button>
         <button type="button" onClick={() => navigate("/notifications")}>
           <IoMdNotificationsOutline />
-          Notification
+          {t("MENU_NOTI")}
         </button>
         {user === null ? (
           <button type="button" onClick={() => navigate("/users/login")}>
             <MdLogin />
-            Login
+            {t("MENU_LOGIN")}
           </button>
         ) : (
           <button
@@ -52,7 +54,7 @@ export const MenuList: FC<Props> = ({}) => {
             }}
           >
             <MdLogout />
-            Logout
+            {t("MENU_LOGOUT")}
           </button>
         )}
       </div>

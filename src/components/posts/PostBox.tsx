@@ -110,10 +110,10 @@ export const PostBox: FC<Props> = ({ post }) => {
               className="post__delete"
               onClick={handleDelete}
             >
-              Delete
+              삭제
             </button>
             <button type="button" className="post__edit">
-              <Link to={`/posts/edit/${post?.id}`}>Edit</Link>
+              <Link to={`/posts/edit/${post?.id}`}>수정</Link>
             </button>
           </>
         )}

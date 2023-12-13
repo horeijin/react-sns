@@ -202,7 +202,7 @@ export const PostEditForm: FC<Props> = ({}) => {
                   type="button"
                   onClick={handleDeleteImage}
                 >
-                  Clear
+                  삭제
                 </button>
               </div>
             )}
@@ -216,7 +216,7 @@ export const PostEditForm: FC<Props> = ({}) => {
           />
           <input
             type="submit"
-            value="Edit"
+            value="수정"
             className="post-form__submit-btn"
             disabled={isSubmitting}
           />

@@ -168,7 +168,7 @@ export const SignupForm: FC<Props> = ({}) => {
           className="form__btn--google"
           onClick={onClickSocialLogin}
         >
-          Google로 회원가입
+          구글로 회원가입
         </button>
       </div>
       <div className="form__block">
@@ -178,7 +178,7 @@ export const SignupForm: FC<Props> = ({}) => {
           className="form__btn--github"
           onClick={onClickSocialLogin}
         >
-          Github으로 회원가입
+          깃허브로 회원가입
         </button>
       </div>
     </form>

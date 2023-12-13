@@ -127,7 +127,7 @@ export const ProfileEdit: FC<Props> = ({}) => {
                 onClick={handleDeleteImage}
                 className="post-form__clear-btn"
               >
-                Delete
+                삭제
               </button>
             </div>
           )}
@@ -148,7 +148,7 @@ export const ProfileEdit: FC<Props> = ({}) => {
             />
             <input
               type="submit"
-              value="Profile Edit"
+              value="프로필 수정"
               className="post-form__submit-btn"
             />
           </div>
