@@ -1,6 +1,7 @@
 import { FC, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PostProps } from "pages/home";
+import { FollowingBox } from "components/following/FollowingBox";
 
 import AuthContext from "context/AuthContext";
 
@@ -63,21 +64,22 @@ export const PostBox: FC<Props> = ({ post }) => {
 
   return (
     <div className="post__box" key={post?.id}>
-      <Link to={`/posts/${post?.id}`}>
-        <div className="post__box-profile">
-          <div className="post__flex">
-            {post?.profileUrl ? (
-              <img
-                src={post?.profileUrl}
-                alt="profile"
-                className="post__box-profile-img"
-              />
-            ) : (
-              <FaUserCircle className="post__box-profile-icon" />
-            )}
-            <div className="post__email">{post?.email}</div>
-            <div className="post__createdAt">{post?.createdAt}</div>
-          </div>
+      <div className="post__box-profile">
+        <div className="post__flex">
+          {post?.profileUrl ? (
+            <img
+              src={post?.profileUrl}
+              alt="profile"
+              className="post__box-profile-img"
+            />
+          ) : (
+            <FaUserCircle className="post__box-profile-icon" />
+          )}
+          <div className="post__email">{post?.email}</div>
+          <div className="post__createdAt">{post?.createdAt}</div>
+          <FollowingBox post={post} />
+        </div>
+        <Link to={`/posts/${post?.id}`}>
           <div className="post__box-content">{post?.content}</div>
           {post?.imageUrl && (
             <div className="post__image-div">
@@ -97,8 +99,9 @@ export const PostBox: FC<Props> = ({ post }) => {
               </span>
             ))}
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
+
       <div className="post__box-footer">
         {user?.uid === post?.uid && (
           <>

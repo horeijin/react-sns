@@ -1,0 +1,122 @@
+import { FC, useCallback, useContext, useEffect, useState } from "react";
+import { PostProps } from "pages/home";
+import AuthContext from "context/AuthContext";
+
+import { db } from "firebaseApp";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+
+import { toast } from "react-toastify";
+
+interface Props {
+  post: PostProps;
+}
+
+interface UserProps {
+  id: string;
+}
+
+export const FollowingBox: FC<Props> = ({ post }) => {
+  const { user } = useContext(AuthContext);
+  const [postFollowers, setPostFollowers] = useState<any>([]);
+
+  const onClickFollow = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      if (user?.uid) {
+        // 내가 팔로우하는 유저의 컬렉션 생성 or 업데이트
+        const followingRef = doc(db, "following", user?.uid);
+        await setDoc(
+          followingRef,
+          {
+            users: arrayUnion({ id: post?.uid }),
+          },
+          { merge: true }
+        );
+
+        // 팔로우 당하는 사람 기준, 팔로워들 컬렉션 생성 or 업데이트
+        const followerRef = doc(db, "follower", post?.uid);
+        await setDoc(
+          followerRef,
+          { users: arrayUnion({ id: user?.uid }) },
+          { merge: true }
+        );
+
+        toast.success("팔로우 성공");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onClickDeleteFollow = async (e: any) => {
+    e.preventDefault();
+    try {
+      if (user?.uid) {
+        const followingRef = doc(db, "following", user?.uid);
+        await updateDoc(followingRef, {
+          users: arrayRemove({ id: post?.uid }),
+        });
+
+        const followerRef = doc(db, "follower", post?.uid);
+        await updateDoc(followerRef, {
+          users: arrayRemove({ id: user.uid }),
+        });
+
+        toast.success("팔로우 취소");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getFollowers = useCallback(async () => {
+    if (post.uid) {
+      const ref = doc(db, "follower", post.uid);
+      onSnapshot(ref, (doc) => {
+        setPostFollowers([]);
+        doc
+          ?.data()
+          ?.users?.map((user: UserProps) =>
+            setPostFollowers((prev: UserProps[]) =>
+              prev ? [...prev, user?.id] : []
+            )
+          );
+      });
+    }
+  }, [post.uid]);
+
+  useEffect(() => {
+    if (post.uid) getFollowers();
+  }, [getFollowers, post.uid]);
+
+  return (
+    <>
+      {user?.uid !== post?.uid &&
+        (postFollowers?.includes(user?.uid) ? (
+          <button
+            type="button"
+            className="post__following-btn"
+            onClick={onClickDeleteFollow}
+          >
+            Following
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="post__follow-btn"
+            onClick={onClickFollow}
+          >
+            Follow
+          </button>
+        ))}
+    </>
+  );
+};
