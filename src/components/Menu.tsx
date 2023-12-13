@@ -5,6 +5,7 @@ import { BsHouse } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import { MdLogout, MdLogin } from "react-icons/md";
 import { AiOutlineSearch } from "react-icons/ai";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 
 import AuthContext from "context/AuthContext";
@@ -31,6 +32,10 @@ export const MenuList: FC<Props> = ({}) => {
         <button type="button" onClick={() => navigate("/search")}>
           <AiOutlineSearch />
           Search
+        </button>
+        <button type="button" onClick={() => navigate("/notifications")}>
+          <IoMdNotificationsOutline />
+          Notification
         </button>
         {user === null ? (
           <button type="button" onClick={() => navigate("/users/login")}>
